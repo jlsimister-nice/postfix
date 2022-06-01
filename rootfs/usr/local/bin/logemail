@@ -1,0 +1,13 @@
+#!/bin/bash
+FILE="${1?}"
+
+if [ -e "$FILE" ]
+then
+  echo "" >> "$FILE"
+  echo "--------------------------------------------------------------------------------" >> "$FILE"
+  echo "" >> "$FILE"
+else
+  touch "$FILE"
+fi
+
+exec cat >> "$FILE"

@@ -1,9 +1,12 @@
-# postfix [![Travis](https://img.shields.io/travis/cloudposse/postfix.svg)]()
+# postfix-email-sink
 
-This is project implements as a docker container a postfix mail server. It supports a configurable hostname, trusted hosts, proper
-shutdown handling and mail relay (e.g. to mailgun).
+This is project implements as a docker container a postfix email sink suitable for testing.
+It supports a configurable hostname, proper shutdown handling, and TLS/STARTTLS security (including a client certificate).
+The server logs all mail transferred successfully. **This server does not deliver or relay email.**
 
 ## Notes
+
+This project was originally forked from [cloudposse/postfix](https://github.com/cloudposse/postfix) and updated to Ubuntu 20.04 LTS with Postfix >= 3.4.
 
 By default, connected rfc1918 networks are detected and allowed. Local networks 
 (127.0.0.1, ::1) are also allowed.

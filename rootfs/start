@@ -455,10 +455,13 @@ then
   if [ -n "$relay_auth_domain" ] && [ -n "$relay_auth_user" ] && [ -n "$relay_auth_pass" ]
   then
     echo "$relay_auth_domain $relay_auth_user:$relay_auth_pass" > $SASL_PASSWD
-    chmod 600 $SASL_PASSWD
   fi
 
-  postmap   $SASL_PASSWD
+  if [ -e $SASL_PASSWD ]
+  then
+    chmod 600 $SASL_PASSWD
+    postmap   $SASL_PASSWD
+  fi
 fi
 
 # Utilize the init script to configure the chroot (if needed)
@@ -488,7 +491,7 @@ trap_term_signal() {
 trap "trap_hup_signal" HUP
 trap "trap_term_signal" TERM
 
-/usr/lib/postfix/master -c /etc/postfix -d &
+/usr/lib/postfix/sbin/master -c /etc/postfix -d &
 pid=$!
 
 /etc/init.d/saslauthd start
